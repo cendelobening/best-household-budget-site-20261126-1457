@@ -1,0 +1,250 @@
+/* Hearth Ledger — a warm, paper-like design for a family budget.
+   Cream background, deep forest green, terracotta accents; Georgia for
+   headings and figures, system sans for labels and controls. Layout is a
+   single column on a phone, two columns on a desktop. */
+
+:root {
+  --paper: #faf6ef;
+  --card: #fffdf8;
+  --ink: #1c1917;
+  --muted: #57534e;
+  --faint: #78716c;
+  --line: #e7e5e4;
+  --green: #1e4d3a;
+  --green-soft: #e3efe7;
+  --terra: #c2410c;
+  --terra-soft: #fbeadd;
+  --amber: #b45309;
+  --red: #b91c1c;
+  --red-soft: #fdecec;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+a { color: var(--green); }
+
+h1, h2, h3, .figure { font-family: Georgia, "Times New Roman", serif; }
+
+/* --- Header -------------------------------------------------------------- */
+
+.topbar {
+  background: var(--green);
+  color: #f5f0e6;
+  padding: 18px 20px 0;
+}
+
+.topbar-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.brand h1 { margin: 0; font-size: 30px; line-height: 1.1; color: #fff; }
+.brand .tagline { font-size: 14px; color: #cfe3d4; }
+
+.monthbar {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 14px; padding-bottom: 14px; flex-wrap: wrap;
+}
+.monthbar .month-label { font-family: Georgia, serif; font-size: 20px; min-width: 170px; text-align: center; }
+.monthbar button { min-width: 44px; }
+
+nav.tabs {
+  display: flex; gap: 4px; overflow-x: auto;
+  max-width: 1080px; margin: 0 auto; padding: 0 4px;
+  scrollbar-width: none;
+}
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs a {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  color: #cfe3d4; text-decoration: none; font-weight: 600; font-size: 15px;
+  border-radius: 10px 10px 0 0; border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+nav.tabs a:hover { color: #fff; background: rgba(255,255,255,.08); }
+nav.tabs a.active { color: #fff; background: var(--paper); border-bottom-color: var(--paper); color: var(--green); }
+
+/* --- Layout -------------------------------------------------------------- */
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 22px 20px 40px; }
+.page-head { margin: 4px 0 18px; }
+.page-head h2 { margin: 0 0 4px; font-size: 28px; }
+.page-head p { margin: 0; color: var(--muted); max-width: 640px; }
+
+.grid { display: grid; gap: 16px; }
+.grid.two { grid-template-columns: 1fr; }
+@media (min-width: 860px) {
+  .grid.two { grid-template-columns: 1fr 1fr; }
+  .grid.two .span2 { grid-column: 1 / -1; }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: 0 1px 2px rgba(28,25,23,.05);
+}
+.card h3 { margin: 0 0 10px; font-size: 19px; }
+.card .hint { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
+
+/* --- Summary tiles ------------------------------------------------------- */
+
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+@media (min-width: 860px) { .tiles { grid-template-columns: repeat(4, 1fr); } }
+.tile {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 14px 16px;
+}
+.tile .label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+.tile .figure { font-size: 30px; line-height: 1.15; margin-top: 4px; }
+.tile .sub { font-size: 13px; color: var(--faint); margin-top: 2px; }
+.tile.good .figure { color: var(--green); }
+.tile.warn .figure { color: var(--terra); }
+
+/* --- Bars, meters, progress ---------------------------------------------- */
+
+.meter { height: 10px; background: #e7e5e4; border-radius: 6px; overflow: hidden; }
+.meter > span { display: block; height: 100%; border-radius: 6px; background: var(--green); }
+.meter.over > span { background: var(--red); }
+.meter.warm > span { background: var(--amber); }
+
+.budget-row { padding: 12px 0; border-top: 1px solid var(--line); }
+.budget-row:first-of-type { border-top: 0; padding-top: 2px; }
+.budget-row .row-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.budget-row .cat { font-weight: 600; }
+.budget-row .nums { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.budget-row .nums b { color: var(--ink); }
+.budget-row .meter { margin-top: 8px; }
+.budget-row .status { font-size: 13px; margin-top: 6px; }
+.status.over { color: var(--red); font-weight: 600; }
+.status.near { color: var(--amber); font-weight: 600; }
+.status.ok { color: var(--green); }
+
+.goal-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.goal-head .name { font-family: Georgia, serif; font-size: 18px; font-weight: 700; }
+.goal-head .figure { font-size: 18px; }
+.goal .note { color: var(--muted); font-size: 14px; margin: 6px 0 10px; }
+.goal .goal-foot { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; font-size: 13px; color: var(--muted); flex-wrap: wrap; align-items: center; }
+
+/* --- Tables -------------------------------------------------------------- */
+
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td .sub { display: block; font-size: 13px; color: var(--faint); }
+tr.income td.num { color: var(--green); font-weight: 600; }
+tr.expense td.num { color: var(--ink); }
+tr.over td { background: var(--red-soft); }
+
+.table-wrap { overflow-x: auto; margin: 0 -4px; padding: 0 4px; }
+
+/* --- Charts -------------------------------------------------------------- */
+
+.chart-box { position: relative; }
+canvas.donut { width: 100%; height: 240px; display: block; }
+canvas.bars { width: 100%; height: 280px; display: block; }
+canvas.topbars { width: 100%; height: 260px; display: block; }
+.legend { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; font-size: 14px; }
+.legend li { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.legend .dot { flex: 0 0 12px; width: 12px; height: 12px; border-radius: 3px; }
+.legend .amt { margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* --- Forms & controls ---------------------------------------------------- */
+
+button, input, select, textarea { font: inherit; }
+button {
+  cursor: pointer; border: 1px solid var(--green); background: var(--green);
+  color: #fff; border-radius: 9px; padding: 8px 14px; font-weight: 600; font-size: 15px;
+}
+button:hover { background: #16382b; }
+button.ghost { background: transparent; color: var(--green); border-color: #cbd5d1; }
+button.ghost:hover { background: var(--green-soft); }
+button.danger { background: transparent; color: var(--red); border-color: #e5b8b8; }
+button.danger:hover { background: var(--red-soft); }
+button.small { padding: 5px 10px; font-size: 13px; border-radius: 7px; }
+button:disabled { opacity: .5; cursor: default; }
+
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
+  border: 1px solid #d6d3d1; border-radius: 9px; padding: 8px 10px;
+  background: #fff; color: var(--ink); width: 100%;
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+
+.form-grid { display: grid; gap: 12px; }
+@media (min-width: 700px) { .form-grid.cols-2 { grid-template-columns: 1fr 1fr; } }
+.field label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+.field .error { color: var(--red); font-size: 13px; margin-top: 4px; min-height: 0; }
+
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; margin-bottom: 14px; }
+.toolbar .field { flex: 1 1 160px; }
+.toolbar .field.search { flex: 2 1 220px; }
+
+.inline-form { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.inline-form input[type="number"] { width: 130px; }
+
+/* --- Bills, lists -------------------------------------------------------- */
+
+.bill-list { list-style: none; margin: 0; padding: 0; }
+.bill-list li {
+  display: flex; gap: 10px; align-items: center;
+  padding: 10px 0; border-top: 1px solid var(--line);
+}
+.bill-list li:first-child { border-top: 0; }
+.bill-list .bill-name { flex: 1; min-width: 0; }
+.bill-list .bill-name .sub { display: block; font-size: 13px; color: var(--faint); }
+.bill-list .bill-amt { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bill-list li.paid .bill-name { color: var(--faint); text-decoration: line-through; }
+.bill-list li.paid .bill-amt { color: var(--faint); }
+
+.pill {
+  display: inline-block; padding: 2px 9px; border-radius: 20px;
+  font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap;
+}
+.pill.income { background: var(--green); }
+.pill.expense { background: var(--terra); }
+
+.kv { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.kv:first-of-type { border-top: 0; }
+.kv .k { color: var(--muted); }
+.kv .v { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+
+.callout {
+  border-left: 4px solid var(--amber); background: #fdf6e7;
+  padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 0 0 16px;
+}
+.callout.good { border-color: var(--green); background: var(--green-soft); }
+.callout.bad { border-color: var(--red); background: var(--red-soft); }
+.callout p { margin: 0; }
+
+.empty { color: var(--faint); text-align: center; padding: 26px 10px; }
+
+footer.site {
+  max-width: 1080px; margin: 0 auto; padding: 0 20px 36px;
+  color: var(--faint); font-size: 13px;
+}
+footer.site a { color: var(--faint); }
+
+.edit-row { display: flex; gap: 8px; }
+.edit-row button { flex: 0 0 auto; }
+
+@media (max-width: 560px) {
+  .brand h1 { font-size: 25px; }
+  .monthbar .month-label { min-width: 0; flex: 1; font-size: 18px; }
+  .tile .figure { font-size: 25px; }
+  .page-head h2 { font-size: 24px; }
+  .legend { grid-template-columns: 1fr; }
+  th.hide-sm, td.hide-sm { display: none; }
+}

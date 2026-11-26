@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Hearth Ledger — a working household budget site for the Alvarez family: month overview, transactions, budgets, savings goals and reports. All data stays in your browser.">
+<title>Hearth Ledger — The Alvarez Household Budget</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="main.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <h1>Hearth Ledger</h1>
+      <span class="tagline">The Alvarez household budget · Portland, Oregon</span>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#/" data-route="">Overview</a>
+    <a href="#/transactions" data-route="transactions">Transactions</a>
+    <a href="#/budgets" data-route="budgets">Budgets</a>
+    <a href="#/goals" data-route="goals">Savings goals</a>
+    <a href="#/reports" data-route="reports">Reports</a>
+  </nav>
+</header>
+<main class="wrap" id="app" aria-live="polite"></main>
+<footer class="site">
+  <p>Hearth Ledger is a demo household budget: every figure belongs to the fictional Alvarez family, and every change you make is saved in this browser only (localStorage) — nothing leaves your device. <button type="button" class="ghost small" data-action="reset-data">Reset demo data</button></p>
+  <p>Built as plain static files — no network requests, no libraries, no accounts.</p>
+</footer>
+</body>
+</html>
